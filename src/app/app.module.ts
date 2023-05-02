@@ -32,7 +32,6 @@ import { AccountPage } from './pages/settings/account/account.page';
 import { AppearancePage } from './pages/settings/appearance/appearance.page';
 import { AdminPage } from './pages/settings/admin/admin.page';
 import { HasRolesDirective } from './lib/directives/has-roles.directive';
-import { GettingStartedPage } from './pages/getting-started/getting-started.page';
 
 @NgModule({
   declarations: [
@@ -57,7 +56,6 @@ import { GettingStartedPage } from './pages/getting-started/getting-started.page
     AccountPage,
     AppearancePage,
     AdminPage,
-    GettingStartedPage,
   ],
   imports: [
     BrowserModule,

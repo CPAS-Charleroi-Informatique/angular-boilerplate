@@ -9,7 +9,6 @@ import { AccessibilityPage } from './pages/settings/accessibility/accessibility.
 import { AccountPage } from './pages/settings/account/account.page';
 import { AppearancePage } from './pages/settings/appearance/appearance.page';
 import { AdminPage } from './pages/settings/admin/admin.page';
-import { GettingStartedPage } from './pages/getting-started/getting-started.page';
 
 
 const routes: Routes = [
@@ -20,7 +19,6 @@ const routes: Routes = [
       { path: 'register', component: RegisterPage },
     ]
   },
-  {path: 'getting-started', component: GettingStartedPage, title: "Getting Started"},
   { path: 'home', component: HomePage, canActivate: [AuthGuard], title: "Acceuil" },
   { path: 'profile/:username', component: ProfilePage, canActivate: [AuthGuard], title: "Profil" },
   {
