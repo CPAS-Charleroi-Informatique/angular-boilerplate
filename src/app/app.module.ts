@@ -32,6 +32,7 @@ import { AccountPage } from './pages/settings/account/account.page';
 import { AppearancePage } from './pages/settings/appearance/appearance.page';
 import { AdminPage } from './pages/settings/admin/admin.page';
 import { HasRolesDirective } from './lib/directives/has-roles.directive';
+import { TableComponent } from './lib/components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { HasRolesDirective } from './lib/directives/has-roles.directive';
     AccountPage,
     AppearancePage,
     AdminPage,
+    TableComponent,
   ],
   imports: [
     BrowserModule,

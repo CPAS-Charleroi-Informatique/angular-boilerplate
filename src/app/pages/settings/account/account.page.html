@@ -1,1 +1,5 @@
-<p>account works!</p>
+<app-table [params]="tableParam"
+  (onEdit)="Edit($event)"
+  (onAdd)="Add($event)"
+  (onDelete)="Delete($event)"
+ ></app-table>

@@ -11,6 +11,7 @@ export abstract class AbstractListPageService {
   public itemsPerPage: number;
   public requestEmmited: boolean;
   public filteredData: any;
+  public allSelected: boolean = false;
 
   private filter: string = '';
   private _data: any;
@@ -83,6 +84,49 @@ export abstract class AbstractListPageService {
       return this.compare(a[sort.active], b[sort.active], isAsc);
     });
   }
+
+  /*
+  * Fonction permettant de gérer la sélection d'une ligne
+  */
+  updateAllSelected() {
+    this.allSelected = this.filteredData.selected != null && this.filteredData.selected.every((row:any) => row.selected);
+  }
+
+  /*
+  * Fonction permettant de gérer la checkbox globale de sélection
+  */
+  someSelect(): boolean {
+    if (this.data == null)
+      return false;
+
+    if(this.allSelected)
+      return true;
+
+    return this.filteredData.filter((row:any) => row.selected).length > 0 && !this.allSelected;
+  }
+
+  /*
+  * Fonction permettant de set toutes les checkbox cochée ou non selon le paramètre
+  */
+  setAll(selected: boolean) {
+    this.allSelected = selected;
+
+    if (this.data == null)
+      return;
+
+    this.filteredData.forEach((row:any) => (row.selected = selected));
+  }
+
+  /*
+  * Fonction permettant de récupérer les lignes sélectionnées
+  */
+  getSelected() {
+    if (this.data == null)
+      return [];
+
+    return this.filteredData.filter((row:any) => row.selected);
+  }
+
 
   /*
   * Fonction permettant de comparer deux éléments
