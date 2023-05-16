@@ -1,21 +1,22 @@
 <ng-container *ngIf="params">
-    <app-alert *ngIf="errorMessage" [alertType]="alertType" [message]="errorMessage" (clear)="errorMessage = ''"></app-alert>
-    <div>
-      <!-- Skeleton loader -->
-      <app-skeleton-loader *ngIf="!requestEmmited  && !errorMessage" [table]="true"></app-skeleton-loader>
+  <app-alert *ngIf="errorMessage" [alertType]="alertType" [message]="errorMessage"
+    (clear)="errorMessage = ''"></app-alert>
+  <div>
+    <!-- Skeleton loader -->
+    <app-skeleton-loader *ngIf="!requestEmmited  && !errorMessage" [table]="true"></app-skeleton-loader>
 
 
-      <!-- Pas de données trouvées -->
-      <div *ngIf="data.length == 0 && requestEmmited && !errorMessage"
-          class="flex items-center justify-center p-4 font-medium bg-blue-100 border-2 border-blue-300 rounded-lg shadow-lg text-500 animate__animated animate__bounceInDown animate__fast">
-          <img src="assets/images/204.png" alt="no content" class="w-12 h-12">
-          <p class="ml-4 text-xl font-bold !text-black">Pas de données trouvées</p>
-      </div>
+    <!-- Pas de données trouvées -->
+    <div *ngIf="data.length == 0 && requestEmmited && !errorMessage"
+      class="flex items-center justify-center p-4 font-medium bg-blue-100 border-2 border-blue-300 rounded-lg shadow-lg text-500 animate__animated animate__bounceInDown animate__fast">
+      <img src="assets/images/204.png" alt="no content" class="w-12 h-12">
+      <p class="ml-4 text-xl font-bold !text-black">Pas de données trouvées</p>
+    </div>
 
-      <div *ngIf="data.length > 0 && requestEmmited">
-        <div class="w-full h-auto p-4 rounded-lg {{params.backgroundClass !==  '' ? params.backgroundClass : ''}}">
-          <h3 *ngIf="params.title" class="mb-2">{{params.title}}</h3>
-          <hr *ngIf="params.title" class="mb-2">
+    <div *ngIf="data.length > 0 && requestEmmited">
+      <div class="w-full h-auto p-4 rounded-lg {{params.backgroundClass !==  '' ? params.backgroundClass : ''}}">
+        <h3 *ngIf="params.title" class="mb-2">{{params.title}}</h3>
+        <hr *ngIf="params.title" class="mb-2">
 
         <!-- Search bar -->
         <div *ngIf="data.length > 0">
@@ -28,93 +29,96 @@
           <!-- Actions buttons -->
           <div class="flex justify-between mb-4">
             <div class="flex">
-              <button type="button" *ngIf="params.addable" (click)="onClickAdd()" class="px-3 py-2 mx-3 mt-3 text-sm font-medium leading-4 text-white bg-teal-500 border border-transparent rounded-md shadow-sm w-28 max-h-9 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2">
-                Ajouter
-              </button>
-
-              <button type="button" *ngIf="params.editable && getSelected().length === 1" (click)="onClickEdit()" class="px-3 py-2 mx-3 mt-3 text-sm font-medium leading-4 text-white bg-indigo-500 border border-transparent rounded-md shadow-sm w-28 max-h-9 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
-                Modifier
-              </button>
-
-              <button type="button" *ngIf="params.deletable && someSelect()" (click)="onClickDelete()" class="px-3 py-2 mx-3 mt-3 text-sm font-medium leading-4 text-white bg-red-500 border border-transparent rounded-md shadow-sm w-28 max-h-9 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2">
-                Supprimer
-              </button>
+              <app-button *ngIf="params.addable" [text]="'Ajouter'" [type]="'create'" (onClick)="onClickAdd()" class="w-24"></app-button>
+              <app-button *ngIf="params.editable && getSelected().length === 1" [text]="'Modifier'" [type]="'update'"(onClick)="onClickEdit()" class="w-24 ml-3"></app-button>
+              <app-button *ngIf="params.deletable && someSelect()" [text]="'Supprimer'" [type]="'delete'" (onClick)="onClickDelete()" class="w-24 ml-3"></app-button>
             </div>
 
 
             <!-- Actions buttons -->
-          <div class="flex justify-end" *ngIf="data.length > 0">
-            <input id="items-page" type="number" class="bottom-0 w-16 h-8 px-3 mt-4 mr-4 text-gray-800 bg-white border-gray-200" value="10" min="1" (change)="onChangeItemPerPage($event)"/>
+            <div class="flex justify-end" *ngIf="data.length > 0">
+              <input id="items-page" type="number"
+                class="bottom-0 w-16 h-8 px-3 mt-4 mr-4 text-gray-800 bg-white border-gray-200" value="10" min="1"
+                (change)="onChangeItemPerPage($event)" />
 
-            <!-- Télécharger fichier excel-->
-            <button type="button" (click)="onClickDownload('Paiements.csv')"
-              class="inline-flex items-center px-3 py-2 mx-3 mt-3 text-sm font-medium leading-4 text-white bg-teal-600 border border-transparent rounded-md shadow-sm max-h-9 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
-              <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                viewBox="0 0 268.000000 326.000000" preserveAspectRatio="xMidYMid meet">
-
-                <g transform="translate(0.000000,326.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                  <path d="M500 3151 c-83 -26 -151 -82 -192 -161 l-23 -45 -3 -530 c-2 -404 -5
-                  -531 -15 -537 -6 -4 -30 -8 -53 -8 -52 0 -122 -44 -155 -96 l-24 -39 0 -537 0
-                  -536 30 -44 c37 -52 97 -87 164 -95 l51 -6 0 -111 c0 -98 3 -118 26 -166 31
-                  -68 74 -114 139 -148 l50 -27 960 0 960 0 58 34 c35 20 72 52 93 80 67 91 64
-                  37 64 1160 l0 1016 -403 403 -402 402 -650 -1 c-358 0 -661 -4 -675 -8z m1262
-                  -363 c3 -310 7 -327 88 -408 81 -81 98 -85 408 -88 l272 -3 0 -993 0 -992 -29
-                  -46 c-17 -27 -48 -57 -74 -72 l-44 -26 -926 0 c-549 0 -936 4 -950 9 -35 14
-                  -95 69 -114 105 -11 21 -18 66 -21 139 l-5 107 773 0 c706 0 775 1 792 17 17
-                  15 18 44 18 504 0 430 -2 489 -16 503 -14 14 -99 16 -790 16 l-775 0 3 678 c3
-                  744 0 701 65 766 56 57 37 55 705 56 l617 0 3 -272z m-1484 -1120 l3 -108 -38
-                  0 c-48 0 -81 22 -99 66 -30 73 29 157 106 151 25 -2 25 -3 28 -109z m326 -409
-                  c1 -2 19 -32 40 -66 21 -35 40 -63 44 -63 4 0 25 29 47 65 l39 65 48 0 c26 0
-                  48 -3 48 -7 0 -3 -27 -48 -60 -99 -33 -51 -60 -98 -60 -106 0 -7 24 -49 53
-                  -93 30 -44 62 -92 71 -107 l18 -28 -53 0 -54 0 -48 77 -48 76 -37 -60 c-56
-                  -91 -58 -93 -114 -93 -61 0 -62 -4 28 131 l66 99 -65 102 c-36 57 -64 105 -62
-                  108 4 6 94 5 99 -1z m965 -7 c36 -18 65 -52 75 -88 6 -19 1 -23 -30 -29 -33
-                  -6 -39 -3 -69 29 -38 42 -88 49 -126 17 -37 -31 -16 -52 91 -87 126 -42 162
-                  -84 145 -171 -14 -75 -98 -121 -203 -110 -62 7 -115 41 -139 92 -22 45 -12 65
-                  31 65 29 0 38 -5 51 -30 18 -35 43 -50 84 -50 44 0 81 20 88 48 8 33 -21 57
-                  -89 71 -111 24 -158 65 -158 137 0 34 7 51 30 78 34 38 48 43 130 45 35 0 67
-                  -5 89 -17z m-539 -171 c0 -154 2 -180 16 -185 9 -3 60 -6 115 -6 l99 0 0 -35
-                  0 -35 -160 0 -160 0 0 220 0 220 45 0 45 0 0 -179z" />
-                </g>
-              </svg>
-
-              Télécharger
-            </button>
-          </div>
+              <!-- Télécharger fichier excel-->
+              <app-export-csv-button [data]="params.data" [fileName]="'data.csv'"></app-export-csv-button>
+            </div>
           </div>
 
 
-          <!-- Tableau des paiements -->
-          <table *ngIf="data.length > 0" matSort (matSortChange)="sortData($event)" class="w-full text-left rounded-lg shadow-md table-auto ">
+          <!-- Table -->
+          <table *ngIf="data.length > 0" matSort (matSortChange)="sortData($event)"
+            class="w-full text-left rounded-lg shadow-md table-auto">
             <thead>
               <tr class="text-white bg-gray-700">
                 <!-- N'affiche que les données de type primaire -->
                 <th *ngIf="params.selectable" class="px-4 py-2 rounded-tl-lg">
-                  <mat-checkbox [color]="'primary'" [checked]="allSelected "[color]="'primary'" [indeterminate]="someSelect()" (change)="setAll($event.checked)"></mat-checkbox>
+                  <mat-checkbox [color]="'primary'" [checked]="allSelected " [color]="'primary'"
+                    [indeterminate]="someSelect()" (change)="setAll($event.checked)"></mat-checkbox>
                 </th>
                 <ng-container *ngFor="let key of defaultHeaders; let index=index">
-                  <th *ngIf="getType(data[0][key]) !== 'object' && key !== 'selected'" sortable-icon mat-sort-header="{{key}}" class="px-4 py-2 {{index === 0 && !params.selectable ? 'rounded-tl-lg' : ''}} {{(index + 1) === columnNumber && params.selectable ? 'rounded-tr-lg' : ''}} {{index === columnNumber && !params.selectable ? 'rounded-tr-lg' : ''}}">{{key}}</th>
+                  <th *ngIf="getType(data[0][key]) !== 'object' && key !== 'selected'  && key !== 'expanded'" sortable-icon
+                    mat-sort-header="{{key}}"
+                    class="px-4 py-2 {{index === 0 && !params.selectable ? 'rounded-tl-lg' : ''}} {{(index + 1) === columnNumber && params.selectable ? 'rounded-tr-lg' : ''}} {{index === columnNumber && !params.selectable ? 'rounded-tr-lg' : ''}}">
+                    {{key}}</th>
                 </ng-container>
               </tr>
             </thead>
             <tbody>
               <!-- N'affiche que les données de type primaire -->
-              <ng-container *ngFor="let row of filteredData | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
-                <tr>
+              <ng-container *ngFor="let row of filteredData | paginate: { itemsPerPage: itemsPerPage, currentPage: p } ; let index=index">
+                <tr class="{{params.childProperty != null ? 'cursor-pointer' : ''}}"  (click)="onClickRow(row,$event)">
                   <td *ngIf="params.selectable" class="px-4 py-2">
-                    <mat-checkbox [checked]="row.selected ? true : false" (ngModelChange)="updateAllSelected()" [(ngModel)]="row.selected" [color]="'primary'"></mat-checkbox>
+                    <mat-checkbox [checked]="row.selected ? true : false" (ngModelChange)="updateAllSelected()"
+                      [(ngModel)]="row.selected" [color]="'primary'"></mat-checkbox>
                   </td>
                   <ng-container *ngFor="let key of defaultHeaders">
-                    <td *ngIf="getType(row[key]) !== 'object' && key !== 'selected' && getType(row[key]) !== 'boolean'" class="px-4 py-2">{{row[key]}}</td>
-                    <td *ngIf="getType(row[key]) !== 'object' && key !== 'selected' && getType(row[key]) == 'boolean'" class="px-4 py-2">
+                    <td *ngIf="getType(row[key]) !== 'object' && key !== 'selected' &&  key !== 'expanded' && getType(row[key]) !== 'boolean'"
+                      class="px-4 py-2">{{row[key]}}</td>
+                    <td *ngIf="getType(row[key]) !== 'object' && key !== 'selected' && key !== 'expanded' && getType(row[key]) == 'boolean'"
+                      class="px-4 py-2">
                       <div class="w-3 h-3 ml-4 {{row[key] == true ? 'bg-green-400' : 'bg-red-400'}} rounded-full"></div>
                     </td>
                   </ng-container>
                 </tr>
+
+                <!-- Sous table -->
+                <tr *ngIf="params.childProperty && (row[params.childProperty] && row[params.childProperty].length > 0) && row.expanded" class="bg-slate-200 animate__animated animate__faster {{index % 2 == 0 ? 'animate__slideInLeft' : 'animate__slideInRight'}}">
+                  <td colspan="8">
+                    <div class="overflow-x-auto">
+                      <table (click)="row.expanded = !row.expanded" class="w-full text-left table-auto cursor-pointer">
+                        <thead>
+                          <tr class="text-black">
+                            <ng-container *ngFor="let subKey of subDefaultHeaders; let subIndex=index">
+                              <th *ngIf="getType(data[0][params.childProperty][0][subKey]) !== 'object'" class="px-4 py-2 bg-slate-200">
+                                {{subKey}}
+                              </th>
+                            </ng-container>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let subRow of row[params.childProperty]">
+                            <ng-container *ngFor="let subKey of subDefaultHeaders">
+                              <td *ngIf="getType(subRow[subKey]) !== 'object' && getType(subRow[subKey]) !== 'boolean'" class="px-4 py-2 bg-white">
+                                {{subRow[subKey]}}
+                              </td>
+                              <td *ngIf="getType(subRow[subKey]) !== 'object' && getType(subRow[subKey]) == 'boolean'" class="px-4 py-2 bg-white">
+                                <div class="w-3 h-3 ml-4 {{subRow[subKey] == true ? 'bg-green-400' : 'bg-red-400'}} rounded-full"></div>
+                              </td>
+                            </ng-container>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </td>
+                </tr>
               </ng-container>
             </tbody>
           </table>
-          <pagination-controls class="pagination" previousLabel="" nextLabel="" (pageChange)="p = $event"></pagination-controls>
+          <pagination-controls class="pagination" previousLabel="" nextLabel=""
+            (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>

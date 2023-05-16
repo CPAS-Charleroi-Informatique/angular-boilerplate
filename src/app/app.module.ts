@@ -33,6 +33,8 @@ import { AppearancePage } from './pages/settings/appearance/appearance.page';
 import { AdminPage } from './pages/settings/admin/admin.page';
 import { HasRolesDirective } from './lib/directives/has-roles.directive';
 import { TableComponent } from './lib/components/table/table.component';
+import { ExportCsvButtonComponent } from './lib/components/export-csv-button/export-csv-button.component';
+import { ButtonComponent } from './lib/components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { TableComponent } from './lib/components/table/table.component';
     AppearancePage,
     AdminPage,
     TableComponent,
+    ExportCsvButtonComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

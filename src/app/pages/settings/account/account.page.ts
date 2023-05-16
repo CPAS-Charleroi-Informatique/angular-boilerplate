@@ -12,21 +12,61 @@ export class AccountPage implements OnInit {
   constructor(private http : HttpClient) {
 
     this.tableParam = {
-      // callback: this.http.get('https://jsonplaceholder.typicode.com/users'),
+      //  callback: this.http.get('https://jsonplaceholder.typicode.com/users'),
       data:[
         {
           id: 1,
           name: 'Le nom',
           email: 'Email',
           phone: 'Téléphone',
-          actif: true
+          actif: true,
+          roles: [
+            {
+              id: 1,
+              name: 'Admin',
+              test: 'test',
+              bool: false,
+              obj:{
+                test: 'test',
+              }
+            },
+            {
+              id: 2,
+              name: 'User',
+              test: 'test',
+              bool: true,
+              obj:{
+                test: 'test',
+              }
+            }
+          ]
         },
         {
           id: 2,
           name: 'Le nom',
           email: 'Email',
           phone: 'Téléphone',
-          actif:false
+          actif:false,
+          roles: [
+            {
+              id: 1,
+              name: 'Admin',
+              test: 'test',
+              bool: false,
+              obj:{
+                test: 'test',
+              }
+            },
+            {
+              id: 2,
+              name: 'User',
+              test: 'test',
+              bool: true,
+              obj:{
+                test: 'test',
+              }
+            }
+          ]
         }
       ],
       itemsPerPage: 10,
@@ -35,7 +75,9 @@ export class AccountPage implements OnInit {
       addable: true,
       editable: true,
       deletable: true,
-      backgroundClass: 'bg-slate-50'
+      backgroundClass: 'bg-slate-50',
+      // childProperty: 'address',
+      childProperty: 'roles',
     }
   }
 

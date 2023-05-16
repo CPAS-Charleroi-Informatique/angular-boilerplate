@@ -8,4 +8,5 @@ export interface TableParam {
   addable?: boolean;
   editable?: boolean;
   deletable?: boolean;
+  childProperty?: string;
 }
