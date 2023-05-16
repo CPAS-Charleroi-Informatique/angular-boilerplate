@@ -35,6 +35,7 @@ import { HasRolesDirective } from './lib/directives/has-roles.directive';
 import { TableComponent } from './lib/components/table/table.component';
 import { ExportCsvButtonComponent } from './lib/components/export-csv-button/export-csv-button.component';
 import { ButtonComponent } from './lib/components/button/button.component';
+import { SlideOverComponent } from './lib/components/slide-over/slide-over.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ButtonComponent } from './lib/components/button/button.component';
     TableComponent,
     ExportCsvButtonComponent,
     ButtonComponent,
+    SlideOverComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./appearance.page.scss']
 })
 export class AppearancePage implements OnInit {
-
+  public slideOverState : boolean = false;
   constructor() { }
 
   ngOnInit(): void {

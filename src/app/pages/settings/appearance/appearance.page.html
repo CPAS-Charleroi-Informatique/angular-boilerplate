@@ -1,1 +1,15 @@
-<p>appearance works!</p>
+<div class="flex-col-reverse w-64">
+  <p>appearance works!</p>
+
+  <app-button type='update' (click)="slideOverState = !slideOverState">
+    Open slide over
+  </app-button>
+</div>
+
+
+<app-slide-over *ngIf="slideOverState" title="slide over title" (onClose)="slideOverState = false">
+  <ul>
+    <li>Lorem ipsum</li>
+    <li>Lorem ipsum</li>
+  </ul>
+</app-slide-over>

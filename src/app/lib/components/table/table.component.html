@@ -29,9 +29,17 @@
           <!-- Actions buttons -->
           <div class="flex justify-between mb-4">
             <div class="flex">
-              <app-button *ngIf="params.addable" [text]="'Ajouter'" [type]="'create'" (onClick)="onClickAdd()" class="w-24"></app-button>
-              <app-button *ngIf="params.editable && getSelected().length === 1" [text]="'Modifier'" [type]="'update'"(onClick)="onClickEdit()" class="w-24 ml-3"></app-button>
-              <app-button *ngIf="params.deletable && someSelect()" [text]="'Supprimer'" [type]="'delete'" (onClick)="onClickDelete()" class="w-24 ml-3"></app-button>
+              <app-button *ngIf="params.addable" [type]="'create'" (onClick)="onClickAdd()" class="w-24">
+                Ajouter
+              </app-button>
+
+              <app-button *ngIf="params.editable && getSelected().length === 1"  [type]="'update'"(onClick)="onClickEdit()" class="w-24 ml-3">
+                Modifier
+              </app-button>
+
+              <app-button *ngIf="params.deletable && someSelect()" [type]="'delete'" (onClick)="onClickDelete()" class="w-24 ml-3">
+                Supprimer
+              </app-button>
             </div>
 
 
